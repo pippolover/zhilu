@@ -3,7 +3,7 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 	<!--  default -->
 	<appender name="DEFAULT-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="file" value="/Users/yimingwym/logs/app/default.log" />
+		<param name="file" value="/home/admin/logs/app/default.log" />
 		<param name="append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p [%t] %c{2}.%M(%F:%L):%m%n" />
@@ -11,17 +11,17 @@
 	</appender>
 	<!--  error -->
 	<appender name="ERROR-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="file" value="/Users/yimingwym/logs/app/error.log" />
+		<param name="file" value="/home/admin/logs/app/error.log" />
 		<param name="append" value="true" />
 		<param name="threshold" value="ERROR" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p [%t] %c{2}.%M(%F:%L):%m%n" />
 		</layout>
 	</appender>
-	
+
 	<!-- web -->
 	<appender name="WEB-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="file" value="/Users/yimingwym/logs/app/web.log" />
+		<param name="file" value="/home/admin/logs/app/web.log" />
 		<param name="append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p [%t] %c{2}.%M(%F:%L):%m%n" />
@@ -29,7 +29,7 @@
 	</appender>
 	<!-- api -->
 	<appender name="API-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="file" value="/Users/yimingwym/logs/app/api.log" />
+		<param name="file" value="/home/admin/logs/app/api.log" />
 		<param name="append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p [%t] %m%n" />
@@ -37,16 +37,23 @@
 	</appender>
 	<!-- dal -->
 	<appender name="DAL-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="file" value="/Users/yimingwym/logs/app/dal.log" />
+		<param name="file" value="/home/admin/logs/app/dal.log" />
 		<param name="append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p [%t] %c{2}.%M(%F:%L):%m%n" />
 		</layout>
 	</appender>
-
+	<!-- framework -->
+	<appender name="FRAMEWORK-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/home/admin/logs/framework.log" />
+		<param name="append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%t] %c{2}.%M(%F:%L):%m%n" />
+		</layout>
+	</appender>
 	<!-- biz -->
 	<appender name="BIZ-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="file" value="/Users/yimingwym/logs/app/biz.log" />
+		<param name="file" value="/home/admin/logs/biz.log" />
 		<param name="append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p [%t] %c{2}.%M(%F:%L):%m%n" />
@@ -54,13 +61,13 @@
 	</appender>
 	<!-- performance -->
 	<appender name="PERF-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="file" value="/Users/yimingwym/logs/app/performance.log" />
+		<param name="file" value="/home/admin/logs/performance.log" />
 		<param name="append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p [%t] %c{2}.%M(%F:%L):%m%n" />
 		</layout>
 	</appender>
-	
+
 
 	<!-- web -->
 	<logger name="com.springapp.mvc" additivity="false">
@@ -68,7 +75,7 @@
 		<appender-ref ref="WEB-APPENDER" />
 		<appender-ref ref="ERROR-APPENDER" />
 	</logger>
-	
+
 	<!-- api -->
 	<logger name="APIRequestLogger" additivity="false">
 		<level value="INFO" />
@@ -81,9 +88,8 @@
 		<appender-ref ref="DAL-APPENDER" />
 		<appender-ref ref="ERROR-APPENDER" />
 	</logger>
-
 	<!-- biz -->
-	<logger name="com.springapp.service" additivity="false">
+	<logger name="com.springapp" additivity="false">
 		<level value="INFO" />
 		<appender-ref ref="BIZ-APPENDER" />
 		<appender-ref ref="ERROR-APPENDER" />
@@ -93,8 +99,8 @@
 		<level value="INFO" />
 		<appender-ref ref="PERF-APPENDER" />
 	</logger>
-	
-	
+
+
 	<root>
 		<priority value="INFO" />
 		<appender-ref ref="DEFAULT-APPENDER" />

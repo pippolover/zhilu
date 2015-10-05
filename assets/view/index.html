@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="zhilu">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>枝鲁</title>
+    <!--build:css css/index.css -->
+    <link rel="stylesheet" type="text/css" href="/resources/css/flaming.cloud.css">
+    <link rel="stylesheet" type="text/css" href="/resources/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/resources/vendor/awesome/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/resources/vendor/codemwnci/bootstrap-markdown.css">
+    <link rel="stylesheet" type="text/css" href="/resources/vendor/summernote/summernote.css">
+    <link rel="stylesheet" type="text/css" href="/resources/vendor/summernote/summernote-bs3.css">
+    <link rel="stylesheet" type="text/css" href="/resources/vendor/videogular-themes-default/videogular.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/acloud.css">
+    <!--/build-->
+</head>
+
+<body>
+
+    <header ng-include="'/view/common/header.html'"></header>
+    <div ui-view class="content-container"></div>
+    <div ng-include="'/view/common/footer.html'"></div>
+    
+    <!--build:js js/index.js-->
+    <script src="/resources/vendor/jquery/jquery.js"></script>
+    <script src="/resources/vendor/angular/angular.js"></script>
+    <script src="/resources/vendor/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/resources/vendor/angular-animate/angular-animate.js"></script>
+    <script src="/resources/vendor/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/resources/vendor/angular/angular-file-upload.js"></script>
+    <script src="/resources/vendor/hammerjs/hammer.js"></script>
+    <script src="/resources/vendor/lodash-compat/lodash.js"></script>
+    <script src="/resources/vendor/ui-codemirror/ui-codemirror.js"></script>
+    <script src="/resources/vendor/codemwnci/Markdown-Image.js"></script>
+    <script src="/resources/vendor/codemwnci/Markdown.Converter.js"></script>
+    <script src="/resources/vendor/codemwnci/Markdown.Sanitizer.js"></script>
+    <script src="/resources/vendor/codemwnci/bootstrap-markdown.js"></script>
+    <script src="/resources/vendor/codemwnci/markdown-editpreview-ng.js"></script>
+    <script src="/resources/vendor/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+    <script src="/resources/vendor/bootstrap/angular-bootstrap-checkbox.js"></script>
+    <script src="/resources/vendor/bootstrap/bootstrap.js"></script>
+    <script src="/resources/vendor/summernote/summernote.js"></script>
+    
+    <script src="/resources/vendor/videogular/videogular.js"></script>
+    <script src="/resources/vendor/videogular-controls/vg-controls.js"></script>
+    <script src="/resources/vendor/videogular-buffering/vg-buffering.js"></script>
+    <script src="/resources/vendor/videogular-overlay-play/vg-overlay-play.js"></script>
+    <script src="/resources/vendor/videogular-poster/vg-poster.js"></script>
+    <script src="/resources/vendor/videogular-ima-ads/vg-ima-ads.js"></script>
+    <script src="/resources/vendor/videogular-angulartics/vg-analytics.js"></script>
+
+    <script src="/resources/js/app.js"></script>
+    <script src="/resources/js/route.js"></script>
+    <script src="/resources/js/services.js"></script>
+
+    <!-- controller -->
+    <script src="/resources/js/zhilu/productCtrl.js"></script>
+
+    <!--/build -->
+</body>
+
+</html>
