@@ -22,7 +22,7 @@ public interface ProductInfoDAO {
     public ProductInfoDO get(@Param("id")String id);
 
     //模糊查询相似id的款式
-    @Select("select * from product_info where id like '%#{idPrefix}%'")
+    @Select("select * from product_info where id like '%${idPrefix}%'")
     public List<ProductInfoDO> query(@Param("idPrefix") String idPrefix);
 
 

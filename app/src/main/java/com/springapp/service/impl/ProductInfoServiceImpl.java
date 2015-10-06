@@ -11,6 +11,9 @@ import com.springapp.utils.ProductInfoGenerater;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by yimingwym on 15/9/23.
  */
@@ -37,6 +40,17 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     @Override public ProductInfoVO get(String id) {
         ProductInfoDO productInfoDO = productInfoDAO.get(id);
         return ConverterUtils.covert(productInfoDO,ProductInfoVO.class);
+    }
+
+    @Override public List<ProductInfoVO> query(String query) {
+        List<ProductInfoVO> result = new ArrayList<>();
+        List<ProductInfoDO> productInfoDOs = productInfoDAO.query(query);
+        for (ProductInfoDO productInfoDO : productInfoDOs){
+            if (productInfoDO != null){
+                result.add(ConverterUtils.covert(productInfoDO,ProductInfoVO.class));
+            }
+        }
+        return result;
     }
 
     public void setProductInfoDAO(ProductInfoDAO productInfoDAO) {

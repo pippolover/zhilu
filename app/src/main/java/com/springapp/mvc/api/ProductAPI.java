@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by yimingwym on 15/9/23.
@@ -31,5 +32,12 @@ public class ProductAPI extends APIExceptionHandler {
     public APIResult<ProductInfoVO> get(@PathVariable("id") String id){
         ProductInfoVO productInfoVO = productInfoService.get(id);
         return new APIResult<ProductInfoVO>(productInfoVO);
+    }
+
+    @RequestMapping(value = "/webapi/product",method = RequestMethod.GET)
+    @ResponseBody
+    public APIResult<List<ProductInfoVO>> query(String query){
+        List<ProductInfoVO> productInfoVOs = productInfoService.query(query);
+        return new APIResult<List<ProductInfoVO>>(productInfoVOs);
     }
 }
