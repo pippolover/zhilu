@@ -1,5 +1,6 @@
 package com.springapp.service;
 
+import com.springapp.model.AccessoryVO;
 import com.springapp.model.ProductInfoVO;
 
 import java.util.List;
@@ -13,4 +14,8 @@ public interface ProductInfoService {
     public ProductInfoVO get(String id);
 
     public List<ProductInfoVO> query(String query);
+
+    public AccessoryVO addAccessory(AccessoryVO accessoryVO);
+
+    public List<AccessoryVO> getAccessory(String productId);
 }

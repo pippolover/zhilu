@@ -33,7 +33,9 @@ public class ConverterUtils {
         }
         List<T> list = new ArrayList<>();
         for (Object source : sources) {
-            list.add(covert(source, targetClass));
+            if (source!= null) {
+                list.add(covert(source, targetClass));
+            }
         }
         return list;
     }

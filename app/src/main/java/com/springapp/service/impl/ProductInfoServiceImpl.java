@@ -1,7 +1,10 @@
 package com.springapp.service.impl;
 
+import com.springapp.dao.AccessoryDAO;
 import com.springapp.dao.ProductInfoDAO;
+import com.springapp.dateModel.AccessoryDO;
 import com.springapp.dateModel.ProductInfoDO;
+import com.springapp.model.AccessoryVO;
 import com.springapp.model.ProductInfoVO;
 import com.springapp.service.ProductInfoService;
 import com.springapp.service.SequenceService;
@@ -21,6 +24,9 @@ import java.util.List;
 public class ProductInfoServiceImpl implements ProductInfoService {
     @Autowired
     ProductInfoDAO productInfoDAO;
+
+    @Autowired
+    AccessoryDAO accessoryDAO;
 
     @Autowired
     SequenceService sequenceService;
@@ -53,9 +59,22 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         return result;
     }
 
+    @Override public AccessoryVO addAccessory(AccessoryVO accessoryVO) {
+        AccessoryDO accessoryDO = ConverterUtils.covert(accessoryVO,AccessoryDO.class);
+        accessoryDAO.insert(accessoryDO);
+        return accessoryVO;
+    }
+
+    @Override public List<AccessoryVO> getAccessory(String productId) {
+        List<AccessoryDO> accessoryDOs = accessoryDAO.getByProduct(productId);
+        return ConverterUtils.convertList(accessoryDOs,AccessoryVO.class);
+    }
+
     public void setProductInfoDAO(ProductInfoDAO productInfoDAO) {
         this.productInfoDAO = productInfoDAO;
     }
 
-
+    public void setAccessoryDAO(AccessoryDAO accessoryDAO) {
+        this.accessoryDAO = accessoryDAO;
+    }
 }
