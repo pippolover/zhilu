@@ -7,16 +7,22 @@ public class ProductInfoDO {
     //款号
     private String id;
 
-    //批次
+    //批次(波段) 一位
     private String batch;
-    //颜色
+    //色号 3位
     private String color;
-    //序号
+    //流水号
     private String sequence;
     //季度
     private String season;
     //定量
     private String orderNum;
+
+    //品类
+    private String category;
+
+    //价格
+    private Double price;
 
     public String getId() {
         return id;
@@ -64,5 +70,21 @@ public class ProductInfoDO {
 
     public void setOrderNum(String orderNum) {
         this.orderNum = orderNum;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

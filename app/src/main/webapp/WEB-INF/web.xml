@@ -5,13 +5,19 @@
 
 	<display-name>Spring MVC Application</display-name>
 	<welcome-file-list>
-		<welcome-file>pages/index.html</welcome-file>
+		<welcome-file>view/index.html</welcome-file>
 	</welcome-file-list>
+	<context-param>
+		<param-name>spring.profiles.default</param-name>
+		<param-value>prod</param-value>
+	</context-param>
 	<!-- 配置Spring配置文件路径 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:applicationContext.xml
+			classpath:META-INF/spring/app.xml,
+			classpath:META-INF/spring/db.xml,
+			classpath:META-INF/spring/env.xml
 		</param-value>
 	</context-param>
 	<!-- 配置Spring上下文监听器 -->

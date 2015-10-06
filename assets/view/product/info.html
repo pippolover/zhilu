@@ -1,0 +1,41 @@
+<div class="" xmlns="http://www.w3.org/1999/html">
+    <div ng-controller="productCtrl" class="container">
+        <div row>
+            <input type="text" ng-model="productId" class="form-control input-lg" value=""
+                   placeholder="请输入款号"/>
+            <input type="button" class="btn btn-primary pull-right "
+                   ng-click="queryProduct(productId)" style="margin-top: 10px" value="查询">
+        </div>
+
+        <div class="content-container">
+            <div row>
+                <div col="9">
+                    <h1>订量 <span class="order-id"> {{product.orderNum}}</span> </h1>
+                </div>
+                <div col="3">
+                    <h1><button value="修改" ng-click="" >修改 </button></h1>
+                </div>
+            </div>
+
+
+            <div row class="product-item">
+                <label col="3">款号</label>
+                <input  type="text" col="3" ng-model="product.id">
+
+                <label col="3">批次</label>
+                <input type="text" col="3" ng-model="product.batch">
+
+            </div>
+            <div row>
+                <label col="3">颜色</label>
+                <input type="text" col="3" col="3" ng-model="product.color">
+
+                <label col="3">货季</label>
+                <input type="text" col="3" col="3" ng-model="product.season">
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
