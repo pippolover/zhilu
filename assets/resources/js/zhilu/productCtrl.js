@@ -4,6 +4,11 @@ function productCtrl($scope, $http, $location, $document, $window,$modal,$timeou
     $scope.add = 0;
     var vm = this;
 
+
+    console.log("query all product");
+    queryAllProduct();
+
+
     function queryProduct(productId) {
 
         productInfoService.queryProductInfo(productId, function (res) {
@@ -20,6 +25,12 @@ function productCtrl($scope, $http, $location, $document, $window,$modal,$timeou
         })
     }
 
+    function queryAllProduct(){
+        productInfoService.queryAllProductInfo(function(res){
+            $scope.productList = res;
+        })
+    }
+
     function showAddProduct() {
         var modalInstance = $modal.open({
             templateUrl: 'product/partials/product.add.tpl.html',
@@ -28,6 +39,9 @@ function productCtrl($scope, $http, $location, $document, $window,$modal,$timeou
             size: "lg"
         });
     }
+
+    // table control
+
 }
 
 function ModalInstanceCtrl($scope, $modalInstance,productInfoService) {

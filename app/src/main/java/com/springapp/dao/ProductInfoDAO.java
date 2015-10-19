@@ -25,6 +25,9 @@ public interface ProductInfoDAO {
     @Select("select * from product_info where id like '%${idPrefix}%'")
     public List<ProductInfoDO> query(@Param("idPrefix") String idPrefix);
 
+    @Select("select * from product_info where 1=1")
+    public List<ProductInfoDO> queryAll();
+
 
     @UpdateProvider(type = UpdateProductProvider.class,method = "update")
     public int update(ProductInfoDO productInfoDO);
