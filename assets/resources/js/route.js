@@ -12,7 +12,7 @@
 			.state('product.info',{
 				url:"/info",
 				templateUrl:"/view/product/info.html",
-				controller:"productCtrl"
+				controller:"productCtrl as vm"
 			})
             .state('user', {
                 abstract: true,
