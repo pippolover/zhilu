@@ -15,6 +15,8 @@ public interface ProductInfoService {
 
     public List<ProductInfoVO> query(String query);
 
+    public List<ProductInfoVO> queryAll();
+
     public AccessoryVO addAccessory(AccessoryVO accessoryVO);
 
     public List<AccessoryVO> getAccessory(String productId);

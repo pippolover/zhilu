@@ -59,6 +59,11 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         return result;
     }
 
+    @Override public List<ProductInfoVO> queryAll() {
+        List<ProductInfoDO> productInfoDOs = productInfoDAO.queryAll();
+        return ConverterUtils.convertList(productInfoDOs,ProductInfoVO.class);
+    }
+
     @Override public AccessoryVO addAccessory(AccessoryVO accessoryVO) {
         AccessoryDO accessoryDO = ConverterUtils.covert(accessoryVO,AccessoryDO.class);
         accessoryDAO.insert(accessoryDO);

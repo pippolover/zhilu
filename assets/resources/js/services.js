@@ -7,6 +7,13 @@
 				})
 			},
 
+            queryAllProductInfo:function(callback){
+                var uri = '/webapi/product/all';
+                $http.get(uri).success(function(data){
+                    callback(data.result);
+                })
+            },
+
             addProductInfo:function(productInfo,$modal){
                 $http({
                     url:'/webapi/product/',
@@ -16,12 +23,13 @@
                         color:productInfo.color,
                         orderNum: productInfo.orderNum,
                         season: productInfo.season,
-                        price: productInfo.price
+                        price: productInfo.price,
+                        category:productInfo.category
                     }),
                     headers: {'Content-Type': 'application/json'}
                 }).success(function(data, status, headers, config){
                     console.log("add product info success");
-                    $modalInstance.close('success');
+                    $modal.close('success');
                 }).error(function(data, status, headers, config){
                     console.log("add product info fails");
                 });

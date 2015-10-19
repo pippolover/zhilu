@@ -39,6 +39,13 @@ public class ProductAPI extends APIExceptionHandler {
         return new APIResult<ProductInfoVO>(productInfoVO);
     }
 
+    @RequestMapping(value = "/webapi/product/all",method = RequestMethod.GET)
+    @ResponseBody
+    public APIResult<List<ProductInfoVO>> queryAll(){
+        List<ProductInfoVO> productInfoVOs = productInfoService.queryAll();
+        return new APIResult<List<ProductInfoVO>>(productInfoVOs);
+    }
+
     @RequestMapping(value = "/webapi/product",method = RequestMethod.GET)
     @ResponseBody
     public APIResult<List<ProductInfoVO>> query(String query){
