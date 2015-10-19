@@ -19,6 +19,12 @@ public class ProductAPI extends APIExceptionHandler {
     @Autowired
     ProductInfoService productInfoService;
 
+    /**
+     *
+     * @param httpServletRequest
+     * @param productInfoVO : batch, color,season,category,orderNum, price ±ØÌî
+     * @return
+     */
     @RequestMapping(value = "/webapi/product",method = RequestMethod.POST)
     @ResponseBody
     public APIResult<Boolean> insert(HttpServletRequest httpServletRequest,@RequestBody ProductInfoVO productInfoVO){

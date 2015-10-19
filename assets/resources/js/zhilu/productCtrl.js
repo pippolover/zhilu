@@ -30,7 +30,14 @@ function productCtrl($scope, $http, $location, $document, $window,$modal,$timeou
     }
 }
 
-function ModalInstanceCtrl($scope, $modalInstance) {
+function ModalInstanceCtrl($scope, $modalInstance,productInfoService) {
+    $scope.addProductInfo = addProductInfo;
+
+    function addProductInfo(){
+        console.log($scope.product);
+        productInfoService.addProductInfo($scope.product, $modalInstance);
+    }
+
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
