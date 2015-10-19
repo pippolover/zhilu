@@ -1,1 +1,20 @@
-aaa
+<div class="modal-body">
+    <div row class="product-item">
+        <label col="3">款号</label>
+        <input  type="text" col="3" ng-model="product.id">
+
+        <label col="3">批次</label>
+        <input type="text" col="3" ng-model="product.batch">
+
+    </div>
+    <div row>
+        <label col="3">颜色</label>
+        <input type="text" col="3" col="3" ng-model="product.color">
+
+        <label col="3">货季</label>
+        <input type="text" col="3" col="3" ng-model="product.season">
+    </div>
+    <button class="btn btn-primary" ng-click="addProductInfo()">确定</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+
+</div>
