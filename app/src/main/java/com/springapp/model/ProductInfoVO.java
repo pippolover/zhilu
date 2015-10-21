@@ -1,5 +1,8 @@
 package com.springapp.model;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * Created by yimingwym on 15/9/23.
  */
@@ -21,6 +24,16 @@ public class ProductInfoVO {
     private String orderNum;
 
     private Double price;
+
+    String accessorys;
+
+    String materials;
+
+    List<AccessoryVO> accessoryVOs;
+
+    List<MaterialVO> materialVOs;
+
+    private Date gmtCreate;
 
     public String getId() {
         return id;
@@ -84,5 +97,45 @@ public class ProductInfoVO {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getAccessorys() {
+        return accessorys;
+    }
+
+    public void setAccessorys(String accessorys) {
+        this.accessorys = accessorys;
+    }
+
+    public String getMaterials() {
+        return materials;
+    }
+
+    public void setMaterials(String materials) {
+        this.materials = materials;
+    }
+
+    public List<AccessoryVO> getAccessoryVOs() {
+        return accessoryVOs;
+    }
+
+    public void setAccessoryVOs(List<AccessoryVO> accessoryVOs) {
+        this.accessoryVOs = accessoryVOs;
+    }
+
+    public List<MaterialVO> getMaterialVOs() {
+        return materialVOs;
+    }
+
+    public void setMaterialVOs(List<MaterialVO> materialVOs) {
+        this.materialVOs = materialVOs;
+    }
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 }

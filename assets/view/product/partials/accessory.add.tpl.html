@@ -1,0 +1,34 @@
+<div class="modal-body">
+    <div row class="product-item">
+        <label col="3" control-label="required">辅料编号</label>
+        <input type="text" col="3" ng-model="accessory.uniqueId">
+
+    </div>
+    <div row class="product-item">
+        <label col="3" control-label="required">价格</label>
+        <input type="text" col="3" ng-model="accessory.price">
+    </div>
+    <div row>
+        <label col="3">辅料生产厂商</label>
+        <input type="text"  col="6" ng-model="accessory.factory">
+    </div>
+    <div row>
+        <label col="3">种类</label>
+        <select name="singleSelect" ng-model="accessory.type">
+            <option value="lalian">拉链</option>
+            <option value="luokou">罗口</option>
+        </select>
+    </div>
+    <div row>
+        <label col="3">规格</label>
+        <input type="text" col="3" col="3" ng-model="accessory.specs">
+    </div>
+
+    <div row>
+        <label col="3">数量</label>
+        <input type="text" col="3" col="3" ng-model="accessory.num">
+    </div>
+    <button class="btn btn-primary" ng-click="addAccessoryInfo()">添加</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+
+</div>

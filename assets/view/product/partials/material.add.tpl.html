@@ -1,0 +1,45 @@
+<form>
+    <div class="modal-body">
+        <div row class="product-item">
+            <label col="3" control-label="required">编号</label>
+            <input type="text" col="3"  ng-model="material.uniqueId">
+
+        </div>
+
+        <div row>
+            <label col="3">厂家</label>
+            <input type="text" col="6" required ng-model="material.factory">
+
+        </div>
+        <div row>
+            <label col="3">种类</label>
+            <select name="singleSelect" ng-model="material.type">
+                <option value="cotton">棉织</option>
+                <option value="cottonKin">棉针织</option>
+            </select>
+        </div>
+        <div row>
+            <label col="3">门幅</label>
+            <input type="text" col="3" col="3" ng-model="material.width">
+        </div>
+
+        <div row>
+            <label col="3">成分</label>
+            <input type="text" col="3" col="3" ng-model="material.component">
+        </div>
+
+        <div row>
+            <label col="3">订量</label>
+            <input type="text" col="3" col="3" ng-model="material.orderNum">
+
+        </div>
+        <div row class="product-item">
+            <label col="3" >价格</label>
+            <input ng-pattern="/^[0-9]{1,5}$/" type="text"  col="3" ng-model="material.price">
+        </div>
+
+        <button class="btn btn-primary" ng-click="addMaterialInfo()">添加</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+
+    </div>
+</form>

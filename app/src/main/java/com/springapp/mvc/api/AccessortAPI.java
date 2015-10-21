@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,10 +24,9 @@ public class AccessortAPI extends APIExceptionHandler{
      * @param accessoryVO
      * @return
      */
-    @RequestMapping(value = "/webapi/product/{productId}/accessory",method = RequestMethod.POST)
+    @RequestMapping(value = "/webapi/accessory",method = RequestMethod.POST)
     @ResponseBody
-    public APIResult<AccessoryVO> addAccessory(@PathVariable String productId,@RequestBody AccessoryVO accessoryVO){
-        accessoryVO.setProductId(productId);
+    public APIResult<AccessoryVO> addAccessory(@RequestBody AccessoryVO accessoryVO){
         productInfoService.addAccessory(accessoryVO);
         return new APIResult<AccessoryVO>(accessoryVO);
     }
@@ -36,10 +36,25 @@ public class AccessortAPI extends APIExceptionHandler{
      * @param productId
      * @return
      */
-    @RequestMapping(value = "/webapi/product/{productId}/accessory",method = RequestMethod.GET)
+    @RequestMapping(value = "/webapi/accessory/{accessoryId}",method = RequestMethod.GET)
     @ResponseBody
-    public APIResult<List<AccessoryVO>> getAccessorysByProduct(@PathVariable("productId") String productId){
-        List<AccessoryVO> accessoryVOs = productInfoService.getAccessory(productId);
+    public APIResult<List<AccessoryVO>> getAccessorysByProduct(@PathVariable("accessoryId") String accessoryId){
+        List<AccessoryVO> accessoryVOs = productInfoService.getAccessory(accessoryId);
         return new APIResult<List<AccessoryVO>>(accessoryVOs);
+    }
+
+    @RequestMapping(value = "/webapi/accessory/isValid",method = RequestMethod.GET)
+    @ResponseBody
+    public APIResult<Boolean> checkUniqueIds(String idString){
+        List<String> ids = Arrays.asList(idString.split(","));
+        APIResult<Boolean> apiResult = new APIResult<>();
+        try {
+            apiResult.setSuccess(true);
+            apiResult.setResult(productInfoService.checkAccessoryUniqueIdValid(ids));
+        }catch(Exception e){
+            apiResult.setSuccess(false);
+            apiResult.setErrorMessage(e.getMessage());
+        }
+        return apiResult;
     }
 }

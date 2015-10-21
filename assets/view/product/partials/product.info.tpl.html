@@ -1,0 +1,56 @@
+<form name="productForm" novalidate>
+    <div class="modal-body">
+        <div row class="product-item">
+            <label col="3" control-label="required">款号</label>
+            <input type="text" required maxlength="1" col="3" ng-model="product.id">
+        </div>
+        <div row class="product-item">
+            <label col="3" control-label="required">波段</label>
+            <input type="text" required maxlength="1" col="3" ng-model="product.batch">
+        </div>
+        <div row>
+            <label col="3">颜色</label>
+            <input type="text" required maxlength="3" minlength="3" col="3" col="3" ng-model="product.color">
+        </div>
+        <div row>
+            <label col="3">货季</label>
+            <select name="singleSelect" ng-model="product.season">
+                <option value="1">春</option>
+                <option value="2">夏</option>
+                <option value="3">秋</option>
+                <option value="4">东</option>
+
+            </select>
+        </div>
+        <div row>
+            <label col="3">类别</label>
+            <input type="text" maxlength="1" col="3" col="3" ng-model="product.category">
+        </div>
+        <div row>
+            <label col="3">订量</label>
+            <input type="text" col="3" col="3" ng-model="product.orderNum">
+        </div>
+        <div row>
+            <label col="3" >价格</label>
+            <input type="text" col="3" ng-model="product.price">
+        </div>
+
+        <div row>
+            <label col="3">面料</label>
+            <div ng-repeat="material in product.materialVOs">
+                {{material}}
+            </div>
+        </div>
+
+        <div row>
+            <label col="3">辅料</label>
+            <div ng-repeat="accessory in product.accessoryVOs">
+                {{accessory}}
+            </div>
+        </div>
+
+        <button class="btn btn-primary" ng-click="addProductInfo()">添加</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+
+    </div>
+</form>

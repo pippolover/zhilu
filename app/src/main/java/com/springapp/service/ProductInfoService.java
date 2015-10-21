@@ -1,6 +1,7 @@
 package com.springapp.service;
 
 import com.springapp.model.AccessoryVO;
+import com.springapp.model.MaterialVO;
 import com.springapp.model.ProductInfoVO;
 
 import java.util.List;
@@ -20,4 +21,10 @@ public interface ProductInfoService {
     public AccessoryVO addAccessory(AccessoryVO accessoryVO);
 
     public List<AccessoryVO> getAccessory(String productId);
+
+    public MaterialVO addMaterial(MaterialVO materialVO);
+
+    public Boolean checkMaterialUniqueIdValid(List<String> ids);
+
+    public Boolean checkAccessoryUniqueIdValid(List<String> ids);
 }

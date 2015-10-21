@@ -5,12 +5,11 @@ package com.springapp.model;
  */
 public class AccessoryVO {
     private int id;
+    private String uniqueId;
     //种类
     private String type;
     //数量
     private Integer num;
-    //关联的商品id
-    private String productId;
     //规格
     private String specs;
     //价格
@@ -44,14 +43,6 @@ public class AccessoryVO {
         this.num = num;
     }
 
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
     public String getSpecs() {
         return specs;
     }
@@ -83,4 +74,13 @@ public class AccessoryVO {
     public void setMemo(String memo) {
         this.memo = memo;
     }
+
+    public String getUniqueId() {
+        return uniqueId;
+    }
+
+    public void setUniqueId(String uniqueId) {
+        this.uniqueId = uniqueId;
+    }
+
 }

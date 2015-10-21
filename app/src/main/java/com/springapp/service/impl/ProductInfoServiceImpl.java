@@ -1,10 +1,15 @@
 package com.springapp.service.impl;
 
 import com.springapp.dao.AccessoryDAO;
+import com.springapp.dao.MaterialDAO;
 import com.springapp.dao.ProductInfoDAO;
+import com.springapp.dao.ProductRelationDAO;
 import com.springapp.dateModel.AccessoryDO;
+import com.springapp.dateModel.MaterialDO;
 import com.springapp.dateModel.ProductInfoDO;
+import com.springapp.dateModel.ProductRelationDO;
 import com.springapp.model.AccessoryVO;
+import com.springapp.model.MaterialVO;
 import com.springapp.model.ProductInfoVO;
 import com.springapp.service.ProductInfoService;
 import com.springapp.service.SequenceService;
@@ -15,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +35,12 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     AccessoryDAO accessoryDAO;
 
     @Autowired
+    MaterialDAO materialDAO;
+
+    @Autowired
+    ProductRelationDAO productRelationDAO;
+
+    @Autowired
     SequenceService sequenceService;
 
     @Override public ProductInfoVO insert(ProductInfoVO productInfoVO) {
@@ -38,14 +50,43 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         productInfoVO.setSequence(sequence);
         String id = ProductInfoGenerater.generateId(productInfoVO);
         productInfoVO.setId(id);
+        productInfoVO.setGmtCreate(new Date());
         ProductInfoDO productInfoDO = ConverterUtils.covert(productInfoVO,ProductInfoDO.class);
         productInfoDAO.insertProductInfo(productInfoDO);
-        return null;
+
+        //添加面料
+        if (productInfoVO.getMaterials()!= null) {
+            for (String maId: productInfoVO.getMaterials().split(",")) {
+                productRelationDAO.addProductMaterial(id,maId);
+            }
+        }
+        if (productInfoVO.getAccessorys()!= null){
+            for (String accId: productInfoVO.getAccessorys().split(",")) {
+                productRelationDAO.addProductAccessory(id, accId);
+            }
+        }
+
+        //添加辅料
+        return productInfoVO;
     }
 
     @Override public ProductInfoVO get(String id) {
         ProductInfoDO productInfoDO = productInfoDAO.get(id);
-        return ConverterUtils.covert(productInfoDO,ProductInfoVO.class);
+        List<ProductRelationDO> productRelationDOs = productRelationDAO.query(id);
+        List<MaterialVO> materialVOs = new ArrayList<>();
+        List<AccessoryVO> accessoryVOs = new ArrayList<>();
+        for (ProductRelationDO productRelationDO : productRelationDOs){
+            if (productRelationDO.getAccessoryUniqueId() != null){
+                accessoryVOs.add(ConverterUtils.covert(accessoryDAO.get(productRelationDO.getAccessoryUniqueId()),AccessoryVO.class));
+            }
+            if (productRelationDO.getMaterialUniqueId() != null){
+                materialVOs.add(ConverterUtils.covert(materialDAO.get(productRelationDO.getMaterialUniqueId()),MaterialVO.class));
+            }
+        }
+        ProductInfoVO productInfoVO = ConverterUtils.covert(productInfoDO, ProductInfoVO.class);
+        productInfoVO.setAccessoryVOs(accessoryVOs);
+        productInfoVO.setMaterialVOs(materialVOs);
+        return productInfoVO;
     }
 
     @Override public List<ProductInfoVO> query(String query) {
@@ -75,11 +116,59 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         return ConverterUtils.convertList(accessoryDOs,AccessoryVO.class);
     }
 
+    @Override public MaterialVO addMaterial(MaterialVO materialVO) {
+        MaterialDO materialDO = ConverterUtils.covert(materialVO,MaterialDO.class);
+        materialDAO.insert(materialDO);
+        return ConverterUtils.covert(materialDO,MaterialVO.class);
+    }
+
+    @Override public Boolean checkMaterialUniqueIdValid(List<String> ids) {
+        StringBuffer stringBuffer = new StringBuffer();
+        Boolean trigger = true;
+        for (String uniqueId: ids){
+            if (null == materialDAO.get(uniqueId)){
+                trigger = false;
+                stringBuffer.append(uniqueId);
+                stringBuffer.append(";");
+            }
+        }
+        if (!trigger){
+            stringBuffer.append("不存在");
+            throw  new RuntimeException(stringBuffer.toString());
+        }
+        return Boolean.TRUE;
+    }
+
+    @Override public Boolean checkAccessoryUniqueIdValid(List<String> ids) {
+        StringBuffer stringBuffer = new StringBuffer();
+        Boolean trigger = true;
+        for(String uniqueId: ids){
+            if (null == accessoryDAO.get(uniqueId)){
+                trigger = false;
+                stringBuffer.append(uniqueId);
+                stringBuffer.append(";");
+            }
+        }
+        if (!trigger){
+            stringBuffer.append("不存在");
+            throw  new RuntimeException(stringBuffer.toString());
+        }
+        return Boolean.TRUE;
+    }
+
     public void setProductInfoDAO(ProductInfoDAO productInfoDAO) {
         this.productInfoDAO = productInfoDAO;
     }
 
     public void setAccessoryDAO(AccessoryDAO accessoryDAO) {
         this.accessoryDAO = accessoryDAO;
+    }
+
+    public void setProductRelationDAO(ProductRelationDAO productRelationDAO) {
+        this.productRelationDAO = productRelationDAO;
+    }
+
+    public void setMaterialDAO(MaterialDAO materialDAO) {
+        this.materialDAO = materialDAO;
     }
 }
