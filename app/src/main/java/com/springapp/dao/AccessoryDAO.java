@@ -13,11 +13,14 @@ import java.util.List;
  * Created by yimingwym on 15/10/6.
  */
 public interface AccessoryDAO {
-    @Insert("insert into accessory(type,num,specs,factory,product_id,price,memo) "
-            + "values(#{type},#{num},#{specs},#{factory},#{productId},#{price},#{memo})")
+    @Insert("insert into accessory(unique_id,type,num,specs,factory,price,memo) "
+            + "values(#{uniqueId},#{type},#{num},#{specs},#{factory},#{price},#{memo})")
     @SelectKey(before = false, keyProperty = "id", resultType = Integer.class, statementType = StatementType.STATEMENT, statement = "SELECT LAST_INSERT_ID() AS id")
     public int insert(AccessoryDO accessoryDO);
 
     @Select("select * from accessory where product_id = #{productId}")
     public List<AccessoryDO> getByProduct(@Param("productId") String productId);
+
+    @Select("select * from accessory where unique_id = #{uniqueId}")
+    public AccessoryDO get(@Param("uniqueId") String uniqueId);
 }

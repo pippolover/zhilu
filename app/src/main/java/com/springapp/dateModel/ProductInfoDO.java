@@ -1,5 +1,7 @@
 package com.springapp.dateModel;
 
+import java.util.Date;
+
 /**
  * Created by yimingwym on 15/9/23.
  */
@@ -7,7 +9,7 @@ public class ProductInfoDO {
     //款号
     private String id;
 
-    //批次(波段) 一位
+    //波段 一位
     private String batch;
     //色号 3位
     private String color;
@@ -23,6 +25,8 @@ public class ProductInfoDO {
 
     //价格
     private Double price;
+
+    private Date gmtCreate;
 
     public String getId() {
         return id;
@@ -86,5 +90,13 @@ public class ProductInfoDO {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 }

@@ -20,9 +20,9 @@ public class ProductAPI extends APIExceptionHandler {
     ProductInfoService productInfoService;
 
     /**
-     *
+     * 添加款式
      * @param httpServletRequest
-     * @param productInfoVO : batch, color,season,category,orderNum, price ����
+     * @param productInfoVO : batch, color,season,category,orderNum, price 必填
      * @return
      */
     @RequestMapping(value = "/webapi/product",method = RequestMethod.POST)
@@ -46,7 +46,12 @@ public class ProductAPI extends APIExceptionHandler {
         return new APIResult<List<ProductInfoVO>>(productInfoVOs);
     }
 
-    @RequestMapping(value = "/webapi/product",method = RequestMethod.GET)
+    /**
+     * 模糊查询
+     * @param query
+     * @return
+     */
+    @RequestMapping(value = "/webapi/product/fuzzy",method = RequestMethod.GET)
     @ResponseBody
     public APIResult<List<ProductInfoVO>> query(String query){
         List<ProductInfoVO> productInfoVOs = productInfoService.query(query);

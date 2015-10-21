@@ -13,8 +13,8 @@ import java.util.List;
  * Created by yimingwym on 15/9/23.
  */
 public interface ProductInfoDAO {
-    @Insert("insert into product_info(id,batch,color,sequence,season,order_num,price,category) "
-            + "values(#{id},#{batch},#{color},#{sequence},#{season},#{orderNum},#{price},#{category})")
+    @Insert("insert into product_info(id,batch,color,sequence,season,order_num,price,category,gmt_create) "
+            + "values(#{id},#{batch},#{color},#{sequence},#{season},#{orderNum},#{price},#{category},#{gmtCreate})")
     public int insertProductInfo(ProductInfoDO productInfoDO);
 
     //查询指定id的款式
