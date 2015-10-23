@@ -14,13 +14,20 @@
 				templateUrl:"/view/product/info.html",
 				controller:"productCtrl as vm"
 			})
-            .state('user', {
-                abstract: true,
-                url: "/user",
-                templateUrl: "/view/user/user.html",
-                controller: 'UserCtrl as vm'
+            .state('product.material',{
+                url:"/material",
+                templateUrl:"/view/material/material.html",
+                controller:"materialCtrl as vm"
             })
-
+            .state('goods', {
+                abstract: true,
+                url: "/goods"
+            })
+            .state('goods.manage',{
+                url:"/manage",
+                templateUrl:"/view/goods/goodManage.html",
+                controller:"goodsCtrl as vm"
+            })
 
             
     }

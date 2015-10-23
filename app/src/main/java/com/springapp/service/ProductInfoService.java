@@ -27,4 +27,16 @@ public interface ProductInfoService {
     public Boolean checkMaterialUniqueIdValid(List<String> ids);
 
     public Boolean checkAccessoryUniqueIdValid(List<String> ids);
+
+    /**
+     * 查询所有的辅料
+     * @return
+     */
+    public List<AccessoryVO> queryAllAccessory();
+
+    /**
+     * 查询所有的面料
+     * @return
+     */
+    public List<MaterialVO> queryAllMaterial();
 }
