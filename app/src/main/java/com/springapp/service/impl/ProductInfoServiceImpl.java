@@ -156,6 +156,16 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         return Boolean.TRUE;
     }
 
+    @Override public List<AccessoryVO> queryAllAccessory() {
+        List<AccessoryDO> accessoryDOs = new ArrayList<>();
+        return ConverterUtils.convertList(accessoryDOs, AccessoryVO.class);
+    }
+
+    @Override public List<MaterialVO> queryAllMaterial() {
+        List<MaterialDO> materialDOs = new ArrayList<>();
+        return ConverterUtils.convertList(materialDOs,MaterialVO.class);
+    }
+
     public void setProductInfoDAO(ProductInfoDAO productInfoDAO) {
         this.productInfoDAO = productInfoDAO;
     }

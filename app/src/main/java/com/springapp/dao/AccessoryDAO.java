@@ -23,4 +23,7 @@ public interface AccessoryDAO {
 
     @Select("select * from accessory where unique_id = #{uniqueId}")
     public AccessoryDO get(@Param("uniqueId") String uniqueId);
+
+    @Select("select * from accessory where 1=1")
+    public List<AccessoryDO> queryAll();
 }

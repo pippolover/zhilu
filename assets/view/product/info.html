@@ -24,21 +24,22 @@
                 <tr>
                     <th>款号</th>
                     <th>波段</th>
-                    <th></th>
-                    <th></th>
+                    <th>季节</th>
+                    <th>颜色</th>
                     <th>详情</th>
                 </tr>
                 <tr ng-repeat="product in productList">
                     <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">
-                        {{product.id}}</td>
+                        {{product.id}}
+                    </td>
                     <td title="'Age'" filter="{ age: 'number'}" sortable="'age'">
-                        {{product.batch}}</td>
-                    <td>
-                    <td>
-
+                        {{product.batch}}
                     </td>
                     <td>
-
+                        {{product.season}}
+                    </td>
+                    <td>
+                        {{product.color}}
                     </td>
                     <td>
                         <button class="btn btn-sm " value="详情" ng-click="getProduct(product.id)">详情</button>

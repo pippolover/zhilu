@@ -1,6 +1,7 @@
 package com.springapp.dao;
 
 import com.springapp.dateModel.ProductRelationDO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -19,4 +20,7 @@ public interface ProductRelationDAO {
 
     @Select("select * from product_relation where product_id = #{productId}")
     public List<ProductRelationDO> query(@Param("productId")String productId);
+
+    @Delete("delete from product_relation where product_id = #{productId} and material_unique_id = #{materialUniqueId}")
+    public int deleteMaterialRelation(@Param("productId") String productId,@Param("materialUniqueId")String materialUniqueId);
 }

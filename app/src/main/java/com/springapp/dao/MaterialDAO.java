@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * Created by yimingwym on 15/10/21.
  */
@@ -15,4 +17,7 @@ public interface MaterialDAO {
 
     @Select("select * from material where unique_id = #{uniqueId}")
     public MaterialDO get(@Param("uniqueId") String uniqueId);
+
+    @Select("select * from material where 1=1")
+    public List<MaterialDO> queryAll();
 }
