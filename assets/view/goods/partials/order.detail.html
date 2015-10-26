@@ -1,0 +1,56 @@
+<div class="modal-body">
+    <div row class="product-item">
+       <h3>款号:  <span>{{currentProductId}}</span></h3>
+
+
+    </div>
+    <div>
+        <label col="3" control-label="required">按地区汇总</label>
+    </div>
+    <div>
+        <!--<div>{{product}}</div>-->
+        <table class="table" show-filter="true">
+            <tr>
+                <th>地区</th>
+                <th>联系人</th>
+                <th>手机号</th>
+                <th>订单量</th>
+            </tr>
+            <tr ng-repeat="order in orderListByVendor">
+                <td>{{order.vendor.district}}</td>
+                <td>{{order.vendor.contacter}}</td>
+                <td>{{order.vendor.mobile}}</td>
+                <td>{{order.num}}</td>
+
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <div row class="product-item">
+            <label col="3" control-label="required">订单流水</label>
+        </div>
+        <div row>
+            <table class="table" show-filter="true">
+                <tr>
+                    <th>地区</th>
+                    <th>联系人</th>
+                    <th>订单量</th>
+                    <th>下单时间</th>
+                </tr>
+                <tr ng-repeat="orderTransaction in orderTransactionList">
+                    <td>{{orderTransaction.vendor.district}}</td>
+                    <td>{{orderTransaction.vendor.contacter}}</td>
+                    <td>{{orderTransaction.num}}</td>
+                    <td>{{orderTransaction.gmtCreate |date:yyyy-MM-dd}}</td>
+                </tr>
+                </table>
+        </div>
+    </div>
+
+
+    <div row >
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+
+</div>

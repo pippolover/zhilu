@@ -1,0 +1,25 @@
+<div class="modal-body">
+    <div row class="product-item">
+        <label col="3" control-label="required">订货地区</label>
+        <input type="text" col="3" ng-model="vender.district">
+
+    </div>
+    <div row class="product-item">
+        <label col="3" control-label="required">姓名</label>
+        <input type="text" col="3" ng-model="vender.contacter">
+    </div>
+    <div row>
+        <label col="3">联系方式</label>
+        <input type="text"  col="3" ng-model="vender.mobile">
+    </div>
+
+    <div row>
+        <label col="3">地址</label>
+        <input type="text" col="6" ng-model="vender.address">
+    </div>
+
+
+    <button class="btn btn-primary" ng-click="addVender()">添加</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+
+</div>

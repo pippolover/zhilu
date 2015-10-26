@@ -21,7 +21,8 @@
             })
             .state('goods', {
                 abstract: true,
-                url: "/goods"
+                url: "/goods",
+                templateUrl: "/view/common/content.html"
             })
             .state('goods.manage',{
                 url:"/manage",
