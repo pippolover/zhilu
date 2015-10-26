@@ -100,19 +100,106 @@
                 }).error(function(data, status, headers, config){
                     console.log("add material info fails");
                 });
+            },
+
+            //添加vender
+            addVender:function(vender,$modal){
+                $http({
+                    url:'/webapi/vendor',
+                    method:'POST',
+                    data:JSON.stringify({
+                        district:vender.district,
+                        contacter:vender.contacter,
+                        mobile:vender.mobile,
+                        address:vender.address
+                    }),
+                    headers: {'Content-Type': 'application/json'}
+                }).success(function(data, status, headers, config){
+                    console.log("add vender info success");
+                    $modal.close('success');
+                }).error(function(data, status, headers, config){
+                    console.log("add vender info fails");
+                })
+            },
+
+
+            //update vender
+            updateVender:function(vender,$modal){
+                $http({
+                    url:'/webapi/vendor',
+                    method:'PUT',
+                    data:JSON.stringify({
+                        id:vender.id,
+                        district:vender.district,
+                        contacter:vender.contacter,
+                        mobile:vender.mobile,
+                        address:vender.address
+                    }),
+                    headers: {'Content-Type': 'application/json'}
+                }).success(function(data, status, headers, config){
+                    console.log("update vender info success");
+                    $modal.close('success');
+                }).error(function(data, status, headers, config){
+                    console.log("update vender info fails");
+                })
+            },
+
+
+            getVendorAll:function(callback){
+                var uri = '/webapi/vendor/all';
+                $http.get(uri).success(function(data){
+                    callback(data);
+                })
+            },
+
+            addOrder:function(order,$modal){
+                $http({
+                    url:'/webapi/order',
+                    method:'POST',
+                    data:JSON.stringify({
+                        vendorId:order.vendor.id,
+                        productId:order.product.id,
+                        num:order.num
+                    }),
+                    headers: {'Content-Type': 'application/json'}
+                }).success(function(data, status, headers, config){
+                    console.log("add order info success");
+                    $modal.close('success');
+                }).error(function(data, status, headers, config){
+                    console.log("add order info fails");
+                })
+            },
+
+            getOrderByProduct:function(callback){
+                var uri = "/webapi/order/all";
+                $http.get(uri).success(function(data){
+                    callback(data.result);
+                })
+            },
+
+            //获得指定款式的订单详情
+            getOrderByProductDetail:function(productId,callback){
+                var uri = "/webapi/order?productId="+productId;
+                $http.get(uri).success(function(data){
+                    callback(data.result);
+                })
+            },
+
+            //获得指定款式的订单流水
+            getOrderTransactionByProduct:function(productId,callback){
+                var uri = "/webapi/order/transaction?productId="+productId;
+                $http.get(uri).success(function(data){
+                    callback(data.result);
+                })
             }
-	        
+
+
 	    };
 	}
-
-	
-
-
-
 
 
 	angular
     .module('zhilu')
-    .factory('productInfoService', productInfoService)
+    .factory('productInfoService', productInfoService);
 
 

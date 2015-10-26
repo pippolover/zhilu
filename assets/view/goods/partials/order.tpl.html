@@ -1,0 +1,48 @@
+<div class="modal-body">
+    <div row class="product-item">
+        <label col="3" control-label="required">订货地区</label>
+
+        <div col="6">
+            <ui-select ng-model="order.vendor"
+                       theme="bootstrap"
+                       ng-disabled="disabled"
+                       reset-search-input="false"
+                       style="width: 300px;">
+                <ui-select-match placeholder="输入订货商代号..">{{$select.selected.district}}</ui-select-match>
+                <ui-select-choices repeat="vendor in vendorList | filter: $select.search">
+                    <div ng-bind-html="vendor.district | highlight: $select.search"></div>
+                    <small>
+                        联系人: {{vendor.contacter}};
+                        手机: <span ng-bind-html="''+vendor.mobile | highlight: $select.search"></span>
+                    </small>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+
+    </div>
+    <div row class="product-item">
+        <label col="3" control-label="required">款号</label>
+        <div col="6">
+            <ui-select ng-model="order.product"
+                       theme="bootstrap"
+                       ng-disabled="disabled"
+                       reset-search-input="false"
+                       style="width: 300px;">
+                <ui-select-match placeholder="输入款号..">{{$select.selected.id}}</ui-select-match>
+                <ui-select-choices repeat="product in productList | filter: $select.search">
+                    <div ng-bind-html="product.id | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+    <div row>
+        <label col="3">订量</label>
+        <input type="text"  col="3" ng-model="order.num" class="input-item">
+    </div>
+
+
+
+    <button class="btn btn-primary" ng-click="addOrder()">添加</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+
+</div>
