@@ -2,32 +2,32 @@
 <div class="modal-body">
     <!--<div>{{product}}</div>-->
     <div row>
-            <div col="3">编号</div>
-            <div col="3">地区</div>
-            <div col="3">联系人</div>
-            <div col="3">联系方式</div>
-            <div col="3">地址</div>
-            <div col="3">操作</div>
+            <div class="col-md-1">编号</div>
+            <div class="col-md-1">地区</div>
+            <div class="col-md-1">联系人</div>
+            <div class="col-md-2">联系方式</div>
+            <div class="col-md-4">地址</div>
+            <div class="col-md-3">操作</div>
     </div>
     <div row ng-repeat="vender in venderList">
-      <div col="1"><span>{{vender.id}}<span></div>
-      <div col="3">
+      <div class="col-md-1"><span>{{vender.id}}<span></div>
+      <div class="col-md-1">
         <span ng-show="!editMode">{{vender.district}}</span>
         <input ng-show="editMode" ng-model="vender.district" value="{{vender.district}}"></input>
       </div>
-      <div col="4">
+      <div class="col-md-1">
         <span ng-show="!editMode">{{vender.contacter}}</span>
         <input ng-show="editMode" ng-model="vender.contacter" value="{{vender.contacter}}"></input>
       </div>
-      <div col="4">
+      <div class="col-md-2">
         <span ng-show="!editMode">{{vender.mobile}}</span>
         <input ng-show="editMode" ng-model="vender.mobile" value="{{vender.mobile}}"></input>
       </div>
-      <div col="8">
+      <div class="col-md-4">
         <span ng-show="!editMode">{{vender.address}} </span>
         <input value="{{vender.address}}" ng-show="editMode" ng-model="vender.address"></input>
       </div>
-      <div col="4">
+      <div class="col-md-3">
         <button class="btn btn-sm " value="详情" ng-click="enterEditMode()" ng-if="!editMode">修改</button>
         <button class="btn btn-sm" value="" ng-click="updateVender(vender)" ng-if="editMode">确认</button>
         <button class="btn btn-sm" value="" ng-click="cancel()">取消</button>

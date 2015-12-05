@@ -51,7 +51,7 @@ function goodsCtrl($scope, $http, $location, $document, $window,$modal,$timeout,
             templateUrl:'goods/partials/order.detail.html',
             scope:$scope,
             controller:'orderInstanceCtrl',
-            size:'lg'
+            windowClass: 'large-modal-window'
         })
     }
 
@@ -73,6 +73,7 @@ function goodsCtrl($scope, $http, $location, $document, $window,$modal,$timeout,
         templateUrl:'goods/partials/vender.list.tpl.html',
         scope:$scope,
         controller:'VenderInstanceCtrl',
+        windowClass: 'large-modal-window'
         // size:'lg'
       })
     }

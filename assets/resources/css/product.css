@@ -1,8 +1,11 @@
 .product-item{
-    border:1px solid;
+    border:0px solid;
     margin: 5px 5px 5px 5px;
     padding: 5px 5px 5px 5px;
 }
 .input-item{
     margin-top: 5px;
+}
+.large-modal-window .modal-dialog{
+  width: 980px;
 }
