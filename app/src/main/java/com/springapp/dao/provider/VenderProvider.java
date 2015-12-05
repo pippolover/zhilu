@@ -12,9 +12,9 @@ public class VenderProvider {
     //更新
     public String update(VenderDO venderDO){
         BEGIN();
-        UPDATE("vendor");
+        UPDATE("vender");
         if(!StringUtils.isEmpty(venderDO.getDistrict())) {
-            SET("distinct = #{distinct}");
+            SET("district = #{district}");
         }
         if (!StringUtils.isEmpty(venderDO.getContacter())){
             SET("contacter = #{contacter}");

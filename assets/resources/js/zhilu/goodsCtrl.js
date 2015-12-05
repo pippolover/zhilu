@@ -1,7 +1,9 @@
+/**货品管理controller，对应goodManage.html **/
 function goodsCtrl($scope, $http, $location, $document, $window,$modal,$timeout,$stateParams,$state,productInfoService) {
     var vm = this;
     $scope.showAddVender = showAddVender;
     $scope.showAddOrder = showAddOrder;
+    $scope.showUpdateVender = showUpdateVender;
     $scope.getDetail = showOrderDetail;
     $scope.queryOrderList=  queryOrderList;
 
@@ -60,20 +62,51 @@ function goodsCtrl($scope, $http, $location, $document, $window,$modal,$timeout,
     }
     queryOrderList();
 
+    //显示订货商列表
+    function showUpdateVender(){
+      productInfoService.getVendorAll(function(res){
+        $scope.venderList = res.result;
+      })
+      $scope.disableEditVender = "disabled";
+      $scope.editMode = false;
+      var venderListModal = $modal.open({
+        templateUrl:'goods/partials/vender.list.tpl.html',
+        scope:$scope,
+        controller:'VenderInstanceCtrl',
+        // size:'lg'
+      })
+    }
+
 
 }
 
+/**vender创建和修改的的 ctrl **/
 function VenderInstanceCtrl($scope, $modalInstance,productInfoService) {
     $scope.addVender = addVender;
+    $scope.enterEditMode = enterEditMode;
+    $scope.updateVender = updateVender;
     function addVender(){
         productInfoService.addVender($scope.vender,$modalInstance)
     }
 
+    function enterEditMode(){
+      $scope.disableEditVender = "";
+      $scope.editMode = true;
+    }
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
+
+    function updateVender(vender){
+      console.log(vender);
+      productInfoService.updateVender(vender,$modalInstance);
+      $scope.editMode = false;
+
+
+    }
 }
 
+/** 订单创建和修改的ctrl **/
 function orderInstanceCtrl($scope, $modalInstance,productInfoService) {
     $scope.addOrder = addOrder;
     function addOrder() {

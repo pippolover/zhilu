@@ -1,3 +1,4 @@
+/**款式管理**/
 function productCtrl($scope, $http, $location, $document, $window,$modal,$timeout,$stateParams,$state,productInfoService) {
     var vm = this;
     $scope.getProduct = getProduct;
