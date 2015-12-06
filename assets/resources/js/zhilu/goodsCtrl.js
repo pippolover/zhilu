@@ -6,6 +6,7 @@ function goodsCtrl($scope, $http, $location, $document, $window,$modal,$timeout,
     $scope.showUpdateVender = showUpdateVender;
     $scope.getDetail = showOrderDetail;
     $scope.queryOrderList=  queryOrderList;
+    $scope.getAlreadyProduction = getAlreadyProduction;
 
     function showAddVender(isUpdate){
         $scope.vender = {};
@@ -36,13 +37,21 @@ function goodsCtrl($scope, $http, $location, $document, $window,$modal,$timeout,
         })
     }
 
+    function getAlreadyProduction(productId){
+      productInfoService.getProductionNumByProduct(productId,function(res){
+        $scope.alreadyProduction = res;
+      });
+    }
     //查看指定款式的订单详情
-    function showOrderDetail(productId){
+    function showOrderDetail(productId,productNum){
         productInfoService.getOrderByProductDetail(productId,function(res){
             $scope.orderListByVendor = res;
         });
         $scope.currentProductId = productId;
+        $scope.currentProductTotalNum = productNum;
 
+        //获取款式的已生产数量
+        getAlreadyProduction(productId);
         //获取订单流水
         productInfoService.getOrderTransactionByProduct(productId,function(res){
             $scope.orderTransactionList = res;
@@ -102,18 +111,45 @@ function VenderInstanceCtrl($scope, $modalInstance,productInfoService) {
       console.log(vender);
       productInfoService.updateVender(vender,$modalInstance);
       $scope.editMode = false;
-
-
     }
 }
 
 /** 订单创建和修改的ctrl **/
-function orderInstanceCtrl($scope, $modalInstance,productInfoService) {
+function orderInstanceCtrl($scope,$modal, $modalInstance,productInfoService) {
     $scope.addOrder = addOrder;
+    $scope.delivery = delivery;
+    $scope.showAddProduction = showAddProduction;
+    $scope.addProduction = addProduction;
     function addOrder() {
         productInfoService.addOrder($scope.order, $modalInstance);
         $scope.queryOrderList();
     }
+
+    function delivery(){
+      var venderListModal = $modal.open({
+        templateUrl:'goods/partials/vender.list.tpl.html',
+        scope:$scope,
+        controller:'VenderInstanceCtrl',
+        windowClass: 'large-modal-window'
+        // size:'lg'
+      })
+    }
+
+    //增加入库信息
+    function showAddProduction (){
+      var venderListModal = $modal.open({
+        templateUrl : 'goods/partials/production.add.tpl.html',
+        scope : $scope,
+        controller : 'orderInstanceCtrl',
+        size: 'lg'
+      })
+    }
+
+    function addProduction(production){
+      production.productId = $scope.currentProductId;
+      productInfoService.addProduction(production,$modalInstance);
+      $scope.getAlreadyProduction($scope.currentProductId);
+    };
 
 
 

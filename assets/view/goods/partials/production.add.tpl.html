@@ -1,0 +1,20 @@
+<div class="modal-body">
+    <div row>
+        <label class="col-md-4">款号</label>
+        <span class="col-md-4" ng-model="production.productId">{{currentProductId}}</span>
+
+    </div>
+    <div row>
+      <label class="col-md-4">订单总量</label>
+      <span class="col-md-4">{{currentProductTotalNum}}</span>
+    </div>
+    <div row>
+        <label class="col-md-4">入库数量</label>
+        <span class="col-md-8"><input type="text" col="3" ng-model="production.num"></span>
+    </div>
+
+
+    <button class="btn btn-primary" ng-click="addProduction(production)">入库</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+
+</div>

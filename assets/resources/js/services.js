@@ -1,6 +1,6 @@
-function productInfoService($http,$modal){
-	return {
-		queryProductInfo:function(productId,callback){
+function productInfoService ($http, $modal){
+  return {
+		queryProductInfo: function(productId,callback){
 			var uri = '/webapi/product/'+productId;
 			$http.get(uri).success(function(data){
 				callback(data.result);
@@ -13,7 +13,7 @@ function productInfoService($http,$modal){
 			})
 		},
 
-		queryAllProductInfo:function(callback){
+		queryAllProductInfo:function(callback) {
 			var uri = '/webapi/product/all';
 			$http.get(uri).success(function(data){
 				callback(data.result);
@@ -192,9 +192,33 @@ function productInfoService($http,$modal){
 			$http.get(uri).success(function(data){
 				callback(data.result);
 			})
+		},
+
+		//获得指定款式的入库数量
+		getProductionNumByProduct: function(productId,callback){
+			var uri = "/webapi/production/"+productId;
+			$http.get(uri).success(function(data){
+				callback(data.result);
+			})
+		},
+
+		//增加入库信息
+		addProduction:function(production,$modal){
+			$http({
+				url:'/webapi/production',
+				method:'POST',
+				data:JSON.stringify({
+					productId:production.productId,
+					num:production.num
+				}),
+				headers: {'Content-Type': 'application/json'}
+			}).success(function(data, status, headers, config){
+				console.log("add production info success");
+				$modal.close('success');
+			}).error(function(data, status, headers, config){
+				console.log("add production info fails");
+			})
 		}
-
-
 	};
 }
 

@@ -1,9 +1,9 @@
 <div class="" xmlns="http://www.w3.org/1999/html" ng-controller="goodsCtrl">
     <div  class="container">
         <div>
-        <button class="btn btn-sm " value="详情" ng-click="showAddVender()">添加订货商</button>
-        <button class="btn btn-sm " value="详情" ng-click="showUpdateVender()">修改订货商</button>
-        <button class="btn btn-sm " value="详情" ng-click="showAddOrder()">订货</button>
+          <button class="btn btn-sm " value="详情" ng-click="showAddVender()">添加订货商</button>
+          <button class="btn btn-sm " value="详情" ng-click="showUpdateVender()">修改订货商</button>
+          <button class="btn btn-sm " value="详情" ng-click="showAddOrder()">订货</button>
         </div>
         <div>
             <!--<div>{{product}}</div>-->
@@ -17,7 +17,7 @@
                     <td>{{order.productId}}</td>
                     <td>{{order.num}}</td>
                     <td>
-                        <button class="btn btn-sm " value="详情" ng-click="getDetail(order.productId)">详情</button>
+                        <button class="btn btn-sm " value="详情" ng-click="getDetail(order.productId,order.num)">详情</button>
                     </td>
                 </tr>
             </table>

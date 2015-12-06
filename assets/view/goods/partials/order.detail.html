@@ -2,7 +2,6 @@
     <div row class="product-item">
        <h3>款号:  <span>{{currentProductId}}</span></h3>
 
-
     </div>
     <div>
         <label col="3" control-label="required">按地区汇总</label>
@@ -15,13 +14,14 @@
                 <th>联系人</th>
                 <th>手机号</th>
                 <th>订单量</th>
+                <th>操作</th>
             </tr>
             <tr ng-repeat="order in orderListByVendor">
                 <td>{{order.vendor.district}}</td>
                 <td>{{order.vendor.contacter}}</td>
                 <td>{{order.vendor.mobile}}</td>
                 <td>{{order.num}}</td>
-
+                <td> <button ng-click="delivery()" class="btn btn-sm" type="button">发货</button></td>
             </tr>
         </table>
     </div>
@@ -46,6 +46,33 @@
                 </tr>
                 </table>
         </div>
+    </div>
+
+    <div row class="product-item">
+        <label col="3">汇总信息</label>
+    </div>
+    <div row>
+      <table class="table">
+        <tr>
+          <th>总定量</th>
+          <th>已入库</th>
+          <th>待入库</th>
+          <th>已出库</th>
+          <th>待出库</th>
+          <th>操作</th>
+        </tr>
+        <tr>
+          <td>{{currentProductTotalNum}}</td>
+          <td>{{alreadyProduction}}</td>
+          <td>{{currentProductTotalNum - alreadyProduction}}</td>
+          <td></td>
+          <td></td>
+          <td><button class="btn btn-sm" type="button" ng-click="showAddProduction()">入库</button>
+              <button class="btn btn-sm" type="button">出库</button>
+          </td>
+        </tr>
+      </table>
+
     </div>
 
 
