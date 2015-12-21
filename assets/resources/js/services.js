@@ -218,7 +218,36 @@ function productInfoService ($http, $modal){
 			}).error(function(data, status, headers, config){
 				console.log("add production info fails");
 			})
-		}
+		},
+
+	  //增加出库信息
+	  addDeliveryInfo:function(delivery,$modal){
+		  $http({
+			  url:'/webapi/delivery',
+			  method:'POST',
+			  data:JSON.stringify({
+				  productId:delivery.productId,
+				  num:delivery.num,
+				  venderId: delivery.venderId
+			  }),
+			  headers: {'Content-Type': 'application/json'}
+		  }).success(function(data, status, headers, config){
+			  console.log("add delivery  info success");
+			  $modal.close('success');
+		  }).error(function(data, status, headers, config){
+			  console.log("add delivery info fails");
+		  })
+	  },
+
+
+	  //获得指定款式的出库数量
+	  getDeliveryNumByProduct: function(productId,callback){
+		  var uri = "/webapi/delivery/"+productId;
+		  $http.get(uri).success(function(data){
+			  callback(data.result);
+		  })
+	  }
+
 	};
 }
 

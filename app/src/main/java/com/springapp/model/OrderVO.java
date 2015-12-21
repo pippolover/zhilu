@@ -15,6 +15,10 @@ public class OrderVO {
     private Date   gmtCreate;
     private Date   gmtModified;
 
+    private int productionNum;
+
+    private int deliveryNum;
+
     private VenderVO vendor;
 
     public int getId() {
@@ -71,5 +75,21 @@ public class OrderVO {
 
     public void setVendor(VenderVO vendor) {
         this.vendor = vendor;
+    }
+
+    public int getProductionNum() {
+        return productionNum;
+    }
+
+    public void setProductionNum(int productionNum) {
+        this.productionNum = productionNum;
+    }
+
+    public int getDeliveryNum() {
+        return deliveryNum;
+    }
+
+    public void setDeliveryNum(int deliveryNum) {
+        this.deliveryNum = deliveryNum;
     }
 }

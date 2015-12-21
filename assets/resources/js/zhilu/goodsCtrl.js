@@ -37,21 +37,33 @@ function goodsCtrl($scope, $http, $location, $document, $window,$modal,$timeout,
         })
     }
 
+    //获取指定款式已生产的数量
     function getAlreadyProduction(productId){
       productInfoService.getProductionNumByProduct(productId,function(res){
         $scope.alreadyProduction = res;
       });
     }
+
+    function getAlreadyDelivery(productId){
+        productInfoService.getDeliveryNumByProduct(productId,function(res){
+            $scope.alreadyDelivery = res;
+        })
+    }
+
     //查看指定款式的订单详情
     function showOrderDetail(productId,productNum){
         productInfoService.getOrderByProductDetail(productId,function(res){
             $scope.orderListByVendor = res;
         });
         $scope.currentProductId = productId;
+        //总的订单量
         $scope.currentProductTotalNum = productNum;
+        $scope.availNum = productNum - $scope.alreadyProduction;
 
         //获取款式的已生产数量
         getAlreadyProduction(productId);
+        //获取已出库的数量
+        getAlreadyDelivery(productId);
         //获取订单流水
         productInfoService.getOrderTransactionByProduct(productId,function(res){
             $scope.orderTransactionList = res;
@@ -75,7 +87,8 @@ function goodsCtrl($scope, $http, $location, $document, $window,$modal,$timeout,
     function showUpdateVender(){
       productInfoService.getVendorAll(function(res){
         $scope.venderList = res.result;
-      })
+      });
+
       $scope.disableEditVender = "disabled";
       $scope.editMode = false;
       var venderListModal = $modal.open({
@@ -115,25 +128,44 @@ function VenderInstanceCtrl($scope, $modalInstance,productInfoService) {
 }
 
 /** 订单创建和修改的ctrl **/
-function orderInstanceCtrl($scope,$modal, $modalInstance,productInfoService) {
+function orderInstanceCtrl($scope,$modal,$state, $modalInstance,productInfoService) {
     $scope.addOrder = addOrder;
-    $scope.delivery = delivery;
+    $scope.showdeliveryModal = showdeliveryModal;
+    $scope.addDeliveryInfo = addDeliveryInfo;
     $scope.showAddProduction = showAddProduction;
     $scope.addProduction = addProduction;
+    $scope.deliveryInfo;
     function addOrder() {
         productInfoService.addOrder($scope.order, $modalInstance);
         $scope.queryOrderList();
     }
 
-    function delivery(){
+    function showdeliveryModal(order){
+      var order = order;
       var venderListModal = $modal.open({
-        templateUrl:'goods/partials/vender.list.tpl.html',
-        scope:$scope,
-        controller:'VenderInstanceCtrl',
-        windowClass: 'large-modal-window'
-        // size:'lg'
+          templateUrl:'goods/partials/Delivery.tpl.html',
+          scope:$scope,
+          controller:'orderInstanceCtrl',
+          windowClass: 'large-modal-window',
+          resolve:{
+              deliveryInfo:function(){
+                  deliveryInfo = {};
+                  deliveryInfo.productId = $scope.currentProductId;
+                  deliveryInfo.venderId = order.vendor.id;
+                  deliveryInfo.venderDistrict = order.vendor.district;
+                  $scope.deliveryInfo = deliveryInfo;
+                  return deliveryInfo;
+              }
+          }
       })
     }
+
+    //增加发货信息
+    function addDeliveryInfo(deliveryInfo){
+        productInfoService.addDeliveryInfo(deliveryInfo,$modalInstance);
+        $state.reload();
+    }
+
 
     //增加入库信息
     function showAddProduction (){
@@ -145,13 +177,13 @@ function orderInstanceCtrl($scope,$modal, $modalInstance,productInfoService) {
       })
     }
 
+    // 入库操作
     function addProduction(production){
+        console.log($scope.production);
       production.productId = $scope.currentProductId;
       productInfoService.addProduction(production,$modalInstance);
       $scope.getAlreadyProduction($scope.currentProductId);
-    };
-
-
+    }
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');

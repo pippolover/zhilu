@@ -10,7 +10,7 @@
     </div>
     <div row>
         <label class="col-md-4">入库数量</label>
-        <span class="col-md-8"><input type="text" col="3" ng-model="production.num"></span>
+        <span class="col-md-8"><input type="number" col="3" min="0" max="{{availNum}}" ng-model="production.num"></span>
     </div>
 
 

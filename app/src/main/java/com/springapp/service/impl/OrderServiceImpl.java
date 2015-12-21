@@ -6,7 +6,9 @@ import com.springapp.dateModel.OrderDO;
 import com.springapp.dateModel.VenderDO;
 import com.springapp.model.OrderVO;
 import com.springapp.model.VenderVO;
+import com.springapp.service.DeliveryGoodsService;
 import com.springapp.service.OrderService;
+import com.springapp.service.ProductionService;
 import com.springapp.utils.ConverterUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,12 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     VenderDAO venderDAO;
 
+    @Autowired
+    ProductionService productionService;
+
+    @Autowired
+    DeliveryGoodsService deliveryGoodsService;
+
     @Override public OrderVO add(OrderVO orderVO) {
         OrderDO orderDO = ConverterUtils.covert(orderVO,OrderDO.class);
         orderDO.setGmtCreate(new Date());
@@ -36,7 +44,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override public List<OrderVO> getOrderNums() {
         List<OrderDO> orderDOs=  orderDAO.getProductNum();
-        return ConverterUtils.convertList(orderDOs,OrderVO.class);
+        List<OrderVO> orderVOs = ConverterUtils.convertList(orderDOs,OrderVO.class);
+        return orderVOs;
     }
 
     @Override public List<OrderVO> getOrderNumByVendor(String productId) {
@@ -46,6 +55,7 @@ public class OrderServiceImpl implements OrderService {
             OrderVO orderVO = ConverterUtils.covert(orderDO,OrderVO.class);
             VenderDO venderDO = venderDAO.get(orderDO.getVendorId());
             orderVO.setVendor(ConverterUtils.covert(venderDO,VenderVO.class));
+            orderVO.setDeliveryNum(deliveryGoodsService.getDeliveryNumByVender(String.valueOf(venderDO.getId())));
             orderVOs.add(orderVO);
         }
         return orderVOs;

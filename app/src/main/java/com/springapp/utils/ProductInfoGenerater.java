@@ -2,6 +2,9 @@ package com.springapp.utils;
 
 import com.springapp.model.ProductInfoVO;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by yimingwym on 15/10/6.
  */
@@ -31,6 +34,16 @@ public class ProductInfoGenerater {
         return sb.toString();
     }
 
+    /**
+     * 生成带时间戳的18位id
+     * @return
+     */
+    public static String genTransactionBytime(){
+        Date now = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        return simpleDateFormat.format(now)+RandomUtil.generateString(4);
+    }
+
     public static void main(String[] args){
         ProductInfoVO productInfoVO = new ProductInfoVO();
         productInfoVO.setBatch("2");
@@ -40,4 +53,6 @@ public class ProductInfoGenerater {
         productInfoVO.setColor("101");
         System.out.print(generateId(productInfoVO));
     }
+
+
 }
